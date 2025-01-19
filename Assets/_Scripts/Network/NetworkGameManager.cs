@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : NetworkBehaviour
 {
@@ -9,9 +10,7 @@ public class GameManager : NetworkBehaviour
     public NetworkVariable<int> leftScore = new (0);
     public NetworkVariable<int> rightScore = new (0);
 
-    [SerializeField] private NetworkObject ball;
-
-    [SerializeField] private bool startGame;
+    [FormerlySerializedAs("ball")] [SerializeField] private NetworkObject ballPrefab;
     
     public override void OnNetworkSpawn()
     {
@@ -38,14 +37,14 @@ public class GameManager : NetworkBehaviour
 
     private void StartGame(ulong obj)
     {
-        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(obj, out _) && IsOwner && startGame)
-            StartCoroutine(StartingGame());
+        if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(obj, out _) && IsOwner)
+            StartCoroutine(SpawnBall());
     }
     
-    private IEnumerator StartingGame()
+    private IEnumerator SpawnBall()
     {
         yield return new WaitForSeconds(1f);
-        NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(ball);
+        NetworkManager.Singleton.SpawnManager.InstantiateAndSpawn(ballPrefab);
     }
     
     private void UpdateUIScoreLeft(int previousValue, int newValue)
@@ -67,6 +66,6 @@ public class GameManager : NetworkBehaviour
         else
             rightScore.Value++;
         
-        StartCoroutine(StartingGame());
+        StartCoroutine(SpawnBall());
     }
 }

@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float topBound;
     [SerializeField] private float bottomBound;
     
+    
     private void Update()
     {
         MovePlayer();

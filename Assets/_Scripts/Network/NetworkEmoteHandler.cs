@@ -24,9 +24,7 @@ public class NetworkEmoteHandler : NetworkBehaviour
     private IEnumerator DecreaseEmoteCooldown()
     {
         canEmote = false;
-        
         yield return new WaitForSeconds(emoteCooldown);
-        
         canEmote = true;
     }
 
@@ -41,7 +39,12 @@ public class NetworkEmoteHandler : NetworkBehaviour
         NetworkObject spawnedEmote = SpawnManager.Instance.RequestCorrectEmote(emoteNumber).GetComponent<NetworkObject>();
         spawnedEmote.transform.position = transform.position;
         spawnedEmote.transform.rotation = rotation;
-        
+
+        SpawnEmote(spawnedEmote);
+    }
+
+    private void SpawnEmote(NetworkObject spawnedEmote)
+    {
         spawnedEmote.GetComponent<NetworkEmote>().SetLifetime(emoteDuration);
         spawnedEmote.Spawn();
         spawnedEmote.transform.SetParent(transform);
