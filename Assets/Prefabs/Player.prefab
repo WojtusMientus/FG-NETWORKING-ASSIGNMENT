@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   playerInput: {fileID: 3826714824850352509}
+  playerMovement: {fileID: 8870332577046516458}
   emoteHandler: {fileID: 8168720122626347129}
 --- !u!114 &8870332577046516458
 MonoBehaviour:
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a3eaaef9883fd44f8784c4ee3c5bb29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 15
   topBound: 12.8
   bottomBound: -12.8
 --- !u!212 &2867240013086841729
@@ -303,7 +304,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5221471824154963368}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

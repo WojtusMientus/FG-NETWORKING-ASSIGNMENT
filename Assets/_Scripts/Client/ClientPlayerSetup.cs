@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 public class ClientPlayerSetup : NetworkBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private PlayerMovement playerMovement;
+
     [SerializeField] private NetworkEmoteHandler emoteHandler;
 
     public override void OnNetworkSpawn()
@@ -17,6 +19,7 @@ public class ClientPlayerSetup : NetworkBehaviour
         {
             playerInput.enabled = false;
             emoteHandler.enabled = false;
+            playerMovement.enabled = false;
             enabled = false;
         }
         
